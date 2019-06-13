@@ -37,7 +37,7 @@ class Auth0Middleware
             $verifier = new JWTVerifier([
               'supported_algs' => ['RS256'],
               'valid_audiences' => ['https://authorsapi.com'],
-              'authorized_iss' => ['https://dev-hj3mbd5y.auth0.com']
+              'authorized_iss' => ['https://dev-hj3mbd5y.auth0.com'],
             ]);
 
             $decoded = $verifier->verifyAndDecode($token);
