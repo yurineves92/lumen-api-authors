@@ -14,8 +14,11 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+//Auth
+$router->post('auth/login', ['uses' => 'AuthController@authenticate']);
+$router->post('auth/register', ['uses' => 'AuthController@register']);
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api','middleware' => 'jwt.auth'], function () use ($router) {
     $router->get('authors',  ['uses' => 'AuthorController@showAllAuthors']);
 
     $router->get('authors/{id}', ['uses' => 'AuthorController@showOneAuthor']);

@@ -34,13 +34,6 @@ class AuthorController extends Controller
     public function update($id, Request $request)
     {
         $author = Author::findOrFail($id);
-
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:authors',
-            'location' => 'required|alpha'
-        ]);
-
         $author->update($request->all());
 
         return response()->json($author, 200);
@@ -49,6 +42,6 @@ class AuthorController extends Controller
     public function delete($id)
     {
         Author::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        return response()->json('Deleted Successfully', 200);
     }
 }
