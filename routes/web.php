@@ -14,9 +14,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-//Auth
-$router->post('auth/login', ['uses' => 'AuthController@authenticate']);
-$router->post('auth/register', ['uses' => 'AuthController@register']);
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    //Auth
+    $router->post('login', ['uses' => 'AuthController@authenticate']);
+
+    $router->post('register', ['uses' => 'AuthController@register']);
+});
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('authors',  ['uses' => 'AuthorController@showAllAuthors']);
